@@ -17,7 +17,7 @@ export default {
     //  The 'intro' property can be removed if using Phaser 3.21 or above. Keep it for earlier versions.
     output: {
         file: './dist/game.js',
-        name: 'MyGame',
+        name: 'Cars',
         format: 'iife',
         sourcemap: true,
         intro: 'var global = window;'
@@ -61,7 +61,7 @@ export default {
             open: true,
             contentBase: 'dist',
             host: 'localhost',
-            port: 10001,
+            port: 8080,
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }

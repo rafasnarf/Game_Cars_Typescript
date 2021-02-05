@@ -1,7 +1,11 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "allowJs": true,
+        "importHelpers": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["esnext", "dom"]
     },
     "include": [
         "./src/**/*"

@@ -1,47 +1,29 @@
-import 'phaser';
+import Phaser from 'phaser';
+import Constants from './classes/constants';
+import Controller from './classes/mc/controller';
+import Model from './classes/mc/model';
+import MediaManager from './classes/util/mediaManager';
+import config from './config';
+import SceneLoad from './scenes/sceneLoad';
+import SceneTitle from './scenes/sceneTitle';
+import SceneMain from './scenes/sceneMain';
 
-export default class Demo extends Phaser.Scene
-{
-    constructor ()
-    {
-        super('demo');
-    }
+const model = new Model();
+const G = new Constants();
+const controller = new Controller();
+const mediaManager = new MediaManager();
+const emitter = new Phaser.Events.EventEmitter();
 
-    preload ()
-    {
-        this.load.image('logo', 'assets/phaser3-logo.png');
-        this.load.image('libs', 'assets/libs.png');
-        this.load.glsl('bundle', 'assets/plasma-bundle.glsl.js');
-        this.load.glsl('stars', 'assets/starfields.glsl.js');
-    }
+const game = new Phaser.Game(
+  Object.assign(config, {
+    scene: [SceneLoad, SceneTitle, SceneMain]
+  }),
+);
 
-    create ()
-    {
-        this.add.shader('RGB Shift Field', 0, 0, 800, 600).setOrigin(0);
-
-        this.add.shader('Plasma', 0, 412, 800, 172).setOrigin(0);
-
-        this.add.image(400, 300, 'libs');
-
-        const logo = this.add.image(400, 70, 'logo');
-
-        this.tweens.add({
-            targets: logo,
-            y: 350,
-            duration: 1500,
-            ease: 'Sine.inOut',
-            yoyo: true,
-            repeat: -1
-        })
-    }
+game.registry.list = {
+  constants: G,
+  model: model,
+  controller: controller,
+  mediaManager: mediaManager,
+  emitter: emitter
 }
-
-const config = {
-    type: Phaser.AUTO,
-    backgroundColor: '#125555',
-    width: 800,
-    height: 600,
-    scene: Demo
-};
-
-const game = new Phaser.Game(config);
